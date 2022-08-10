@@ -1,5 +1,8 @@
 package com.challenge.musicservice.controllers;
 
+import com.challenge.musicservice.services.ArtistService;
+import com.challenge.musicservice.dtos.ArtistDetailsResponse;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,9 +10,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/musify/music-artist")
 public class ArtistController {
 
-    @GetMapping("/details/{mbid}")
-    ResponseEntity<String> getArtistDetails(@PathVariable Long id) {
-        return ResponseEntity.ok("Successful start up");
+    private final ArtistService artistService;
+
+    public ArtistController(ArtistService service) {
+        this.artistService = service;
     }
 
+    @GetMapping("/details/{id}")
+    ResponseEntity<ArtistDetailsResponse> getArtistDetails(@PathVariable Long id) {
+        return ResponseEntity.ok(artistService.getArtistDetails(id));
+    }
 }

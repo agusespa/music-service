@@ -3,6 +3,7 @@ Execute the Spring Boot run command at the project's root directory:
 ``` Bash
 $ mvn spring-boot:run
 ```
+The embedded tomcat server will listen on port 8081.
 ### Libraries used
 * Spring Web Reactive (WebClient to make the Http calls)
 * Jackson for de/serializing

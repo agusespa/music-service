@@ -175,7 +175,6 @@ public class ArtistService {
 	private String getMusicBrainzAlbumUrl(String id) {
 		String baseUrl = "http://coverartarchive.org/release-group/";
 
-		logger.info("redirect start");
 		try {
 			CoverArt coverData = webClientBuilder
 					.clientConnector(new ReactorClientHttpConnector(HttpClient.create().followRedirect(true)))
@@ -189,7 +188,6 @@ public class ArtistService {
 					.bodyToMono(CoverArt.class)
 					.block();
 
-			logger.info("redirect ends");
 			return coverData.getImages().get(0).getImageUrl();
 
 		} catch (ImageUrlNotFoundException e) {

@@ -16,7 +16,7 @@ public class ArtistController {
         this.artistService = service;
     }
 
-    @GetMapping("/details/{id}")
+    @GetMapping("/details/{mbid}")
     ResponseEntity<ArtistDetailsResponse> getArtistDetails(@PathVariable String mbid) {
         return ResponseEntity.ok(artistService.getArtistDetails(mbid));
     }

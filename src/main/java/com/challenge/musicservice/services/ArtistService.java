@@ -194,7 +194,7 @@ public class ArtistService {
 			return coverData.getImages().get(0).getImageUrl();
 
 		} catch (ImageUrlNotFoundException e) {
-			return "unavailiable";
+			return "unavailable";
 		} catch (Exception e) {
 			throw e;
 		}

@@ -11,5 +11,5 @@ $ mvn spring-boot:run
 ### MBIDs for manually testing the GET details endpoint
 GET_URL = http://localhost:8080/musify/music-artist/details/{mbid}
 * ba550d0e-adac-4864-b88b-407cab5e76af
-* 8ef1df30-ae4f-4dbd-9351-1a32b208a01e
+* 2fa95b32-3c11-42d7-b495-12fc6be0a024
 * 8e66ea2b-b57b-47d9-8df0-df4630aeb8e5

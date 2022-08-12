@@ -32,7 +32,7 @@ public class ArtistServiceTest {
         Relation relation = new Relation();
         relation.setType("wikidata");
         RelationUrl relationUrl = new RelationUrl();
-        relationUrl.setResource("https://www.wikidata.org/wiki/Special:EntityData/Q2831");
+        relationUrl.setResource("https://www.wikidata.org/wiki/Q2831");
         relation.setUrl(relationUrl);
         List<Relation> list = new ArrayList<>();
         list.add(relation);

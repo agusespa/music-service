@@ -3,16 +3,19 @@ package com.challenge.musicservice.services;
 import com.challenge.musicservice.dtos.Album;
 import com.challenge.musicservice.dtos.ArtistDetailsResponse;
 
+import com.challenge.musicservice.exceptions.ImageUrlNotFoundException;
 import com.challenge.musicservice.pojos.CoverArt;
 import com.challenge.musicservice.pojos.MBArtist;
 import com.challenge.musicservice.pojos.Relation;
 import com.challenge.musicservice.pojos.ReleaseGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
 import java.util.ArrayList;
@@ -181,12 +184,17 @@ public class ArtistService {
 					.get()
 					.uri(baseUrl + id)
 					.retrieve()
+					.onStatus(HttpStatus::is4xxClientError, response -> {
+						throw new ImageUrlNotFoundException();
+					})
 					.bodyToMono(CoverArt.class)
 					.block();
 
 			logger.info("redirect ends");
 			return coverData.getImages().get(0).getImageUrl();
 
+		} catch (ImageUrlNotFoundException e) {
+			return "unavailiable";
 		} catch (Exception e) {
 			throw e;
 		}

@@ -1,6 +1,5 @@
 package com.challenge.musicservice.pojos;
 
-import com.challenge.musicservice.dtos.Album;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

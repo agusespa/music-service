@@ -1,5 +1,7 @@
 package com.challenge.musicservice.dtos;
 
+import com.challenge.musicservice.pojos.Album;
+
 import java.util.ArrayList;
 import java.util.List;
 

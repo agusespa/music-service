@@ -1,4 +1,4 @@
-package com.challenge.musicservice.dtos;
+package com.challenge.musicservice.pojos;
 
 public class Album {
 

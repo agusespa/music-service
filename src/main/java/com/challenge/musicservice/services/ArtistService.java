@@ -1,6 +1,6 @@
 package com.challenge.musicservice.services;
 
-import com.challenge.musicservice.dtos.Album;
+import com.challenge.musicservice.pojos.Album;
 import com.challenge.musicservice.dtos.ArtistDetailsResponse;
 
 import com.challenge.musicservice.exceptions.ImageUrlNotFoundException;
@@ -15,7 +15,6 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
 import java.util.ArrayList;

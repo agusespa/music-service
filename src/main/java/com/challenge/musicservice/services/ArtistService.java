@@ -129,7 +129,7 @@ public class ArtistService {
 		}
 	}
 
-	private String getWikidataLink(MBArtist artist) {
+	 String getWikidataLink(MBArtist artist) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("https://www.wikidata.org/wiki/Special:EntityData");
 

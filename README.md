@@ -1,3 +1,8 @@
+### Build and Run
+Execute the Spring Boot run command at the project's root directory:
+``` Bash
+$ mvn spring-boot:run
+```
 ### MBIDs for manual testing
 * ba550d0e-adac-4864-b88b-407cab5e76af
 * 8ef1df30-ae4f-4dbd-9351-1a32b208a01e

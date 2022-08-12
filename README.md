@@ -6,6 +6,7 @@ $ mvn spring-boot:run
 ### Libraries used
 * Spring Web Reactive (WebClient to make the Http calls)
 * Jackson for de/serializing
+* JUnit 5 and Mockito for unit and integration testing
 ### Known Issues
 * Extremely slow and sometimes dropped GET requests due to following redirects of the Cover Art Archive API.
 ### MBIDs for manually testing the GET details endpoint

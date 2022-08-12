@@ -40,7 +40,7 @@ public class ArtistService {
 		return artistDetailsResponse;
 	}
 
-	private void setArtistInfo(ArtistDetailsResponse artistDetailsResponse) {
+	void setArtistInfo(ArtistDetailsResponse artistDetailsResponse) {
 
 		MBArtist mbArtist = getMusicBrainzArtistData(artistDetailsResponse.getMbid());
 
@@ -55,7 +55,7 @@ public class ArtistService {
 		artistDetailsResponse.setAlbums(getArtistAlbums(mbArtist));
 	}
 
-	private MBArtist getMusicBrainzArtistData(String mbid) {
+	MBArtist getMusicBrainzArtistData(String mbid) {
 		String baseURL = "http://musicbrainz.org/ws/2/artist/";
 		String URLparams = "?&fmt=json&inc=url-rels+release-groups";
 
@@ -74,7 +74,7 @@ public class ArtistService {
 		}
 	}
 
-	private String getWikipediaArtistData(MBArtist artist) {
+	String getWikipediaArtistData(MBArtist artist) {
 		String baseURL = "https://en.wikipedia.org/api/rest_v1/page/summary";
 		String title = getWikipediaTitle(artist);
 
@@ -92,7 +92,7 @@ public class ArtistService {
 
 	}
 
-	private String getWikipediaTitle(MBArtist artist) {
+	String getWikipediaTitle(MBArtist artist) {
 
 		String wikidataLink = getWikidataLink(artist);
 
@@ -129,7 +129,7 @@ public class ArtistService {
 		}
 	}
 
-	 String getWikidataLink(MBArtist artist) {
+	String getWikidataLink(MBArtist artist) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("https://www.wikidata.org/wiki/Special:EntityData");
 
@@ -157,7 +157,7 @@ public class ArtistService {
 		return stringBuilder.toString();
 	}
 
-	private List<Album> getArtistAlbums(MBArtist artist) {
+	List<Album> getArtistAlbums(MBArtist artist) {
 
 		List<Album> albums = new ArrayList<>();
 
@@ -172,7 +172,7 @@ public class ArtistService {
 		return albums;
 	}
 
-	private String getMusicBrainzAlbumUrl(String id) {
+	String getMusicBrainzAlbumUrl(String id) {
 		String baseUrl = "http://coverartarchive.org/release-group/";
 
 		try {

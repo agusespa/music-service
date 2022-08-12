@@ -8,12 +8,6 @@ public class Album {
 
     private String imageUrl;
 
-    public Album(String id, String title, String imageUrl) {
-        this.id = id;
-        this.title = title;
-        this.imageUrl = imageUrl;
-    }
-
     public String getId() {
         return id;
     }

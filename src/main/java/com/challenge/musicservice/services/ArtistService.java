@@ -3,15 +3,19 @@ package com.challenge.musicservice.services;
 import com.challenge.musicservice.dtos.Album;
 import com.challenge.musicservice.dtos.ArtistDetailsResponse;
 
+import com.challenge.musicservice.pojos.CoverArt;
 import com.challenge.musicservice.pojos.MBArtist;
 import com.challenge.musicservice.pojos.Relation;
+import com.challenge.musicservice.pojos.ReleaseGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.support.SimpleTriggerContext;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.netty.http.client.HttpClient;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,17 +50,7 @@ public class ArtistService {
 		String description = getWikipediaArtistData(mbArtist);
 		artistDetailsResponse.setDescription(description);
 
-//		setArtistAlbums(artistDetailsResponse.getAlbums(), mbArtist.getReleaseGroups());
-	}
-
-	private void setArtistAlbums(List<Album> albums, Map<String, Object> map) {
-		List list = (List) map.get("release-group");
-
-		for (Object m : list) {
-			Map<String, String> map1 = (Map) m;
-			String albumUrl = getMusicBrainzAlbumUrl(map1.get("id"));
-			albums.add(new Album(map1.get("id"), map1.get("title"), albumUrl));
-		}
+		artistDetailsResponse.setAlbums(getArtistAlbums(mbArtist));
 	}
 
 	private MBArtist getMusicBrainzArtistData(String mbid) {
@@ -161,19 +155,37 @@ public class ArtistService {
 		return stringBuilder.toString();
 	}
 
+	private List<Album> getArtistAlbums(MBArtist artist) {
+
+		List<Album> albums = new ArrayList<>();
+
+		for (ReleaseGroup releaseGroup : artist.getReleaseGroups()) {
+			Album album = new Album();
+			album.setId(releaseGroup.getId());
+			album.setTitle(releaseGroup.getTitle());
+			album.setImageUrl(getMusicBrainzAlbumUrl(releaseGroup.getId()));
+			albums.add(album);
+		}
+
+		return albums;
+	}
+
 	private String getMusicBrainzAlbumUrl(String id) {
 		String baseUrl = "http://coverartarchive.org/release-group/";
 
-		// API redirects
+		logger.info("redirect start");
 		try {
-			String jsonMap = webClientBuilder.build()
+			CoverArt coverData = webClientBuilder
+					.clientConnector(new ReactorClientHttpConnector(HttpClient.create().followRedirect(true)))
+					.build()
 					.get()
 					.uri(baseUrl + id)
 					.retrieve()
-					.bodyToMono(String.class)
+					.bodyToMono(CoverArt.class)
 					.block();
 
-			return jsonMap;
+			logger.info("redirect ends");
+			return coverData.getImages().get(0).getImageUrl();
 
 		} catch (Exception e) {
 			throw e;

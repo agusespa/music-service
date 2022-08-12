@@ -1,5 +1,6 @@
 package com.challenge.musicservice.pojos;
 
+import com.challenge.musicservice.dtos.Album;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,6 +16,8 @@ public class MBArtist {
     private String country;
 
     private String disambiguation;
+
+    private List<Album> albums;
 
     @JsonProperty("release-groups")
     private List<ReleaseGroup> releaseGroups;
@@ -51,6 +54,14 @@ public class MBArtist {
 
     public void setDisambiguation(String disambiguation) {
         this.disambiguation = disambiguation;
+    }
+
+    public List<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
 
     public List<ReleaseGroup> getReleaseGroups() {

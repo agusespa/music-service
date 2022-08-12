@@ -16,6 +16,9 @@ In the current state, response times are unacceptable due to an issue.
 -> See Known Issues
 #### Shortcuts
 * Instead of parsing the object returned by the Wikidata Api which would have been complex, I've extracted the data needed directly from the flat string. It shouldn't affect performance and I've written a test for it.
+#### Testing
+* Unit test (mentioned previously)
+* Half-baked system test. In my previous jobs system testing was done with Postman. I tried to implement a similar test scenario using WebTestClient but couldn't get it to work.
 ### Known Issues
 * Extremely slow GET requests due to following the redirects of the Cover Art Archive API. Repeated calls add a 10+ second penalty. Tried using RestTemplate and got the same result.
 ### MBIDs for manually testing the GET details endpoint
@@ -24,7 +27,7 @@ GET_URL = http://localhost:8081/musify/music-artist/details/{mbid}
 * 2fa95b32-3c11-42d7-b495-12fc6be0a024
 * 8e66ea2b-b57b-47d9-8df0-df4630aeb8e5
 ### TODOs
-* more granular exception handling
+* more granular exception handling with descriptive error messages
 * better response for the case in which one external API fails but we have some artist's data to return
 * better test coverage
 * full end-to-end tests

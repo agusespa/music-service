@@ -1,5 +1,8 @@
 package com.challenge.musicservice.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class ReleaseGroup {
 
     private String id;

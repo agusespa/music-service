@@ -1,8 +1,10 @@
 package com.challenge.musicservice.pojos;
 
-import java.awt.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class CoverArt {
 
     private List<Image> images;

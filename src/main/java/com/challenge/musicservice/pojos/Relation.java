@@ -1,7 +1,10 @@
 package com.challenge.musicservice.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Relation {
 
     private String type;

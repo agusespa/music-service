@@ -1,7 +1,9 @@
 package com.challenge.musicservice.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Image {
 
     private boolean front;

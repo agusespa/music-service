@@ -29,7 +29,6 @@ public class ArtistServiceTest {
         artist.setGender("Male");
         artist.setCountry("US");
         artist.setDisambiguation("“King of Pop”");
-
         Relation relation = new Relation();
         relation.setType("wikidata");
         RelationUrl relationUrl = new RelationUrl();

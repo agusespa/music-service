@@ -60,6 +60,8 @@ public class ArtistService {
 		String URLparams = "?&fmt=json&inc=url-rels+release-groups";
 
 		try {
+			logger.info("Sending GET request to MusicBrainz API");
+
 			MBArtist mbArtist = webClientBuilder.build()
 					.get()
 					.uri(baseURL + mbid + URLparams)
@@ -79,17 +81,20 @@ public class ArtistService {
 		String title = getWikipediaTitle(artist);
 
 		try {
+			logger.info("Sending GET request to Wikipedia API");
+
 			Map jsonMap = webClientBuilder.build()
 					.get()
 					.uri(baseURL + title)
 					.retrieve()
 					.bodyToMono(Map.class)
 					.block();
+
 			return (String) jsonMap.get("extract");
+
 		} catch (Exception e) {
 			throw e;
 		}
-
 	}
 
 	String getWikipediaTitle(MBArtist artist) {
@@ -97,6 +102,8 @@ public class ArtistService {
 		String wikidataLink = getWikidataLink(artist);
 
 		try {
+			logger.info("Sending GET request to Wikidata API");
+
 			String jsonStr = webClientBuilder
 					.exchangeStrategies(ExchangeStrategies.builder()
 							.codecs(configurer -> configurer
@@ -110,6 +117,7 @@ public class ArtistService {
 					.bodyToMono(String.class)
 					.block();
 
+			// finds the wikipedia link and extract the title
 			int firstIndex = jsonStr.indexOf("enwiki");
 			String tempSubstring = jsonStr.substring(firstIndex);
 			int endIndex = tempSubstring.indexOf('}')-1; // -1 to account for '"'
@@ -176,6 +184,8 @@ public class ArtistService {
 		String baseUrl = "http://coverartarchive.org/release-group/";
 
 		try {
+			logger.info("Sending GET request to CoverArt API");
+
 			CoverArt coverData = webClientBuilder
 					.clientConnector(new ReactorClientHttpConnector(HttpClient.create().followRedirect(true)))
 					.build()
@@ -188,7 +198,7 @@ public class ArtistService {
 					.bodyToMono(CoverArt.class)
 					.block();
 
-			return coverData.getImages().get(0).getImageUrl();
+			return coverData.getImages().get(0).getImageUrl(); // ensures at least one image, which is expected to be the cover
 
 		} catch (ImageUrlNotFoundException e) {
 			return "unavailable";

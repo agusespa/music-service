@@ -32,4 +32,3 @@ GET_URL = http://localhost:8081/musify/music-artist/details/{mbid}
 * more granular exception handling with descriptive error messages
 * better response for the case in which one external API fails but we have some artist's data to return
 * better test coverage
-* full end-to-end tests

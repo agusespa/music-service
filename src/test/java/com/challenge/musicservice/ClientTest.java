@@ -1,6 +1,5 @@
 package com.challenge.musicservice;
 
-import com.challenge.musicservice.dtos.ArtistDetailsResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +25,7 @@ public class ClientTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody(ArtistDetailsResponse.class);
+                .expectBody()
+                .jsonPath("$.name").isEqualTo("Michael Jackson");
     }
 }

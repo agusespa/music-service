@@ -15,8 +15,7 @@ If the issue is bypassed, the average latency after a load test of 1000 calls is
 * Instead of parsing the object returned by the Wikidata Api which would have been complex, I've extracted the data needed directly from the flat string. It shouldn't affect performance and I've written a test for it.
 #### Testing impl.
 * Unit test (mentioned previously).
-* Integration test for controller and service layers.
-* Half-baked system test. In my previous jobs system testing was done with Postman. I tried to implement a similar test scenario using WebTestClient but couldn't get it to work.
+* System test using WebTestClient and a real Web Environment. Currently, it allows the extreme latency (i.e., it doesn't fail due to timeout). Must be updated once the issue is resolved.
 * External load testing with Postman.
 ### Libraries used
 * Spring Web Reactive (WebClient to make the Http calls)

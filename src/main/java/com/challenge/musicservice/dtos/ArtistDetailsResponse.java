@@ -21,6 +21,8 @@ public class ArtistDetailsResponse {
 
 	private List<Album> albums;
 
+	public ArtistDetailsResponse() {}
+
 	public ArtistDetailsResponse(String mbid) {
 		this.mbid = mbid;
 		this.albums = new ArrayList<>();

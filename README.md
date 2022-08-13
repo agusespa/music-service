@@ -10,7 +10,7 @@ By default, Spring Boot web applications are multi-threaded and will handle mult
 #### Response times
 The Api calls are blocking but due to the fact that they need to be chained in sequence, they can't be called asynchronously.  
 We could start a thread for setting the album info and cover art as those operations don't need to wait for the other API calls, but I don't think it'd be worth it since the gains would be marginal.  
-In the current state, response times are unacceptable due to an issue covered in 'Known Issues'.  
+In the current state, response times are unacceptable due to an issue covered below in the 'Known Issues' section.  
 If the issue is bypassed, the average latency after a load test of 1000 calls is around 550ms. If there is an exception thrown by the external APIs, the error response is 25ms in average.
 #### Shortcuts
 * Instead of parsing the object returned by the Wikidata Api which would have been complex, I've extracted the data needed directly from the flat string. It shouldn't affect performance and I've written a test for it.

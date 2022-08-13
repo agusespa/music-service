@@ -1,5 +1,5 @@
 ### Build and Run
-Execute the Spring Boot run command at the project's root directory:
+Execute Spring Boot's run command at the project's root directory:
 ``` Bash
 $ mvn spring-boot:run
 ```
@@ -14,6 +14,11 @@ If the issue is bypassed, the average latency after a load test of 1000 calls is
 #### Shortcuts
 * Instead of parsing the object returned by the Wikidata Api which would have been complex, I've extracted the data needed directly from the flat string. It shouldn't affect performance and I've written a test for it.
 #### Testing impl.
+To run the Spring Boot tests, execute Maven's verify command at the project's root directory:
+``` Bash
+$ mvn clean verify
+```
+(All tests are currently green.)
 * Unit test (mentioned previously).
 * System test using WebTestClient and a real Web Environment. Currently, it allows the extreme latency (i.e., it doesn't fail due to timeout). Must be updated once the issue is resolved.
 * External load testing with Postman.

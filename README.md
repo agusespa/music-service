@@ -6,7 +6,7 @@ $ mvn spring-boot:run
 The embedded Tomcat server will listen on port 8081.
 ### Solution breakdown
 Simple REST api built with Spring Web and Spring Boot. One controller class with one endpoint, a service layer to process the request, and a global exception handler.  
-By default Spring Boot web applications are multi-threaded and will handle multiple requests concurrently.
+By default, Spring Boot web applications are multi-threaded and will handle multiple requests concurrently.
 #### Response times
 The Api calls are blocking but due to the fact that they need to be chained, I can't call them asynchronously.  
 In the current state, response times are unacceptable due to an issue covered in 'Known Issues'.  

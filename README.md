@@ -24,7 +24,7 @@ $ mvn clean verify
 * System test using WebTestClient and a real Web Environment. Currently, it allows the extreme latency (i.e., it doesn't fail due to timeout). Must be updated once the issue is resolved.
 * External load testing with Postman.
 #### Known Issues
-* Extremely slow GET requests due to following the redirects of the Cover Art Archive API. Repeated calls add a 10+ second penalty. Tried using RestTemplate and got the same result.
+* Extremely slow GET responses due to following the redirects of the Cover Art Archive API. Repeated calls add a 10+ second penalty. Tried using RestTemplate and got the same result.
 ### Libraries used
 * Spring Web Reactive (WebClient to make the Http calls)
 * Jackson for de/serializing

@@ -13,9 +13,10 @@ In the current state, response times are unacceptable due to an issue covered in
 If the issue is bypassed, the average latency after a load test of 1000 calls is around 550ms. If there is an exception thrown by the external APIs, the error response is 25ms in average.
 #### Shortcuts
 * Instead of parsing the object returned by the Wikidata Api which would have been complex, I've extracted the data needed directly from the flat string. It shouldn't affect performance and I've written a test for it.
-#### Testing
-* Unit test (mentioned previously)
+#### Testing impl.
+* Unit test (mentioned previously).
 * Half-baked system test. In my previous jobs system testing was done with Postman. I tried to implement a similar test scenario using WebTestClient but couldn't get it to work.
+* External load testing with Postman.
 ### Libraries used
 * Spring Web Reactive (WebClient to make the Http calls)
 * Jackson for de/serializing

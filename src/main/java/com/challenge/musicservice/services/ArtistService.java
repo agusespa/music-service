@@ -106,7 +106,7 @@ public class ArtistService {
 
 			String jsonStr = webClientBuilder
 					.exchangeStrategies(ExchangeStrategies.builder()
-							.codecs(configurer -> configurer
+							.codecs(config -> config
 									.defaultCodecs()
 									.maxInMemorySize(16 * 1024 * 1024))
 							.build())

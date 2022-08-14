@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -53,14 +54,11 @@ public class ArtistServiceTest {
 
     @Test
     public void shouldReturnWikipediaTitle() throws IOException {
+        SampleWikidataJson sampleWikidataJson = new SampleWikidataJson();
 
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonString = mapper.readValue(Paths.get("resources","response.json").toFile(), String.class);
+        String expectedTitle = "Michael_Jackson";
+        String testUrl = artistService.findTitle(sampleWikidataJson.getJsonStr());
 
-            String expectedTitle = "Michael_Jackson";
-            String testUrl = artistService.findTitle(jsonString);
-
-            assertEquals(expectedTitle, testUrl);
-
+        assertEquals(expectedTitle, testUrl);
     }
 }

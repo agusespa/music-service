@@ -77,7 +77,7 @@ public class ArtistService {
 	}
 
 	String getWikipediaArtistData(MBArtist artist) {
-		String baseURL = "https://en.wikipedia.org/api/rest_v1/page/summary";
+		String baseURL = "https://en.wikipedia.org/api/rest_v1/page/summary/";
 		String title = getWikipediaTitle(artist);
 
 		try {
@@ -132,7 +132,7 @@ public class ArtistService {
 		int startIndex = 0;
 		for (int i = endIndex; i > 0; i--) {
 			if (tempSubstring.charAt(i) == '/') {
-				startIndex = i;
+				startIndex = i+1;
 				break;
 			}
 		}
@@ -142,7 +142,7 @@ public class ArtistService {
 
 	String getWikidataLink(MBArtist artist) {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("https://www.wikidata.org/wiki/Special:EntityData");
+		stringBuilder.append("https://www.wikidata.org/wiki/Special:EntityData/");
 
 		StringBuilder link = new StringBuilder();
 		for (Relation relation : artist.getRelations()) {
@@ -156,7 +156,7 @@ public class ArtistService {
 		int startIndex = 0;
 		for (int i = link.length()-1; i > 0; i--) {
 			if (link.charAt(i) == '/') {
-				startIndex = i;
+				startIndex = i+1;
 				break;
 			}
 		}

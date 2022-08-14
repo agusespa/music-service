@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,16 +52,15 @@ public class ArtistServiceTest {
     }
 
     @Test
-    public void shouldReturnWikipediaTitle() {
-
-        try {
-            File file = new File(
-                    this.getClass().getClassLoader().getResource("resources/wikidata-sample-response.json").getFile()
-            );
+    public void shouldReturnWikipediaTitle() throws IOException {
 
             ObjectMapper mapper = new ObjectMapper();
-            String jsonString = mapper.readValue(file, String.class);
+            String jsonString = mapper.readValue(Paths.get("resources","response.json").toFile(), String.class);
 
-        } catch (Exception e)
+            String expectedTitle = "Michael_Jackson";
+            String testUrl = artistService.findTitle(jsonString);
+
+            assertEquals(expectedTitle, testUrl);
+
     }
 }

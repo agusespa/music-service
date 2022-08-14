@@ -117,24 +117,27 @@ public class ArtistService {
 					.bodyToMono(String.class)
 					.block();
 
-			// finds the wikipedia link and extract the title
-			int firstIndex = jsonStr.indexOf("enwiki");
-			String tempSubstring = jsonStr.substring(firstIndex);
-			int endIndex = tempSubstring.indexOf('}')-1; // -1 to account for '"'
-			int startIndex = 0;
-			for (int i = endIndex; i > 0; i--) {
-				if (tempSubstring.charAt(i) == '/') {
-					startIndex = i;
-					break;
-				}
-			}
-			String title = tempSubstring.substring(startIndex, endIndex);
-
-			return title;
+			return findTitle(jsonStr);
 
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+
+	// finds the wikipedia link and extracts the title
+	String findTitle(String jsonStr) {
+		int firstIndex = jsonStr.indexOf("enwiki");
+		String tempSubstring = jsonStr.substring(firstIndex);
+		int endIndex = tempSubstring.indexOf('}') - 1; // -1 to account for '"'
+		int startIndex = 0;
+		for (int i = endIndex; i > 0; i--) {
+			if (tempSubstring.charAt(i) == '/') {
+				startIndex = i;
+				break;
+			}
+		}
+		String title = tempSubstring.substring(startIndex, endIndex);
+		return title;
 	}
 
 	String getWikidataLink(MBArtist artist) {

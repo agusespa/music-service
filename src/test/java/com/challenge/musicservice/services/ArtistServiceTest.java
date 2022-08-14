@@ -3,12 +3,15 @@ package com.challenge.musicservice.services;
 import com.challenge.musicservice.pojos.MBArtist;
 import com.challenge.musicservice.pojos.Relation;
 import com.challenge.musicservice.pojos.RelationUrl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,5 +48,19 @@ public class ArtistServiceTest {
         String testUrl = artistService.getWikidataLink(artist);
 
         assertEquals(expectedUrl, testUrl);
+    }
+
+    @Test
+    public void shouldReturnWikipediaTitle() {
+
+        try {
+            File file = new File(
+                    this.getClass().getClassLoader().getResource("resources/wikidata-sample-response.json").getFile()
+            );
+
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonString = mapper.readValue(file, String.class);
+
+        } catch (Exception e)
     }
 }

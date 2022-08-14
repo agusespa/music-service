@@ -198,10 +198,10 @@ public class ArtistService {
 					.bodyToMono(CoverArt.class)
 					.block();
 
-			return coverData.getImages().get(0).getImageUrl(); // ensures at least one image, which is expected to be the cover
+			return coverData.getImages().get(0).getImageUrl(); // index 0 is expected to be the cover
 
 		} catch (ImageUrlNotFoundException e) {
-			return "unavailable";
+			return "image unavailable";
 		} catch (Exception e) {
 			throw e;
 		}

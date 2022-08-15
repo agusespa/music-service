@@ -26,10 +26,11 @@ public class ArtistService {
 
 	WebClient.Builder webClientBuilder;
 
-	Logger logger = LoggerFactory.getLogger(ArtistService.class);
+	Logger logger;
 
 	public ArtistService(WebClient.Builder webClientBuilder) {
 		this.webClientBuilder = webClientBuilder;
+		this.logger = LoggerFactory.getLogger(ArtistService.class);
 	}
 
 	public ArtistDetailsResponse getArtistDetails(String mbid) {
@@ -43,7 +44,6 @@ public class ArtistService {
 	void setArtistInfo(ArtistDetailsResponse artistDetailsResponse) {
 
 		MBArtist mbArtist = getMusicBrainzArtistData(artistDetailsResponse.getMbid());
-
 		artistDetailsResponse.setName(mbArtist.getName());
 		artistDetailsResponse.setGender(mbArtist.getGender());
 		artistDetailsResponse.setCountry(mbArtist.getCountry());
@@ -99,7 +99,7 @@ public class ArtistService {
 
 	String getWikipediaTitle(MBArtist artist) {
 
-		String wikidataLink = getWikidataLink(artist);
+		String wikidataLink = buildWikidataLink(artist);
 
 		try {
 			logger.info("Sending GET request to Wikidata API");
@@ -117,15 +117,15 @@ public class ArtistService {
 					.bodyToMono(String.class)
 					.block();
 
-			return findTitle(jsonStr);
+			return findWikipediaTitle(jsonStr);
 
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
-	// finds the wikipedia link and extracts the title
-	String findTitle(String jsonStr) {
+	// searches the string the wikipedia link and extracts the title
+	String findWikipediaTitle(String jsonStr) {
 		int firstIndex = jsonStr.indexOf("enwiki");
 		String tempSubstring = jsonStr.substring(firstIndex);
 		int endIndex = tempSubstring.indexOf('}') - 1; // -1 to account for '"'
@@ -136,11 +136,10 @@ public class ArtistService {
 				break;
 			}
 		}
-		String title = tempSubstring.substring(startIndex, endIndex);
-		return title;
+		return tempSubstring.substring(startIndex, endIndex);
 	}
 
-	String getWikidataLink(MBArtist artist) {
+	String buildWikidataLink(MBArtist artist) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("https://www.wikidata.org/wiki/Special:EntityData/");
 
@@ -169,7 +168,6 @@ public class ArtistService {
 	}
 
 	List<Album> getArtistAlbums(MBArtist artist) {
-
 		List<Album> albums = new ArrayList<>();
 
 		for (ReleaseGroup releaseGroup : artist.getReleaseGroups()) {

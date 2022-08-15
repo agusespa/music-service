@@ -47,7 +47,7 @@ public class ArtistServiceTest {
     @Test
     public void shouldReturnWikidataLink() {
         String expectedUrl = "https://www.wikidata.org/wiki/Special:EntityData/Q2831.json";
-        String testUrl = artistService.getWikidataLink(artist);
+        String testUrl = artistService.buildWikidataLink(artist);
 
         assertEquals(expectedUrl, testUrl);
     }
@@ -57,7 +57,7 @@ public class ArtistServiceTest {
         SampleWikidataJson sampleWikidataJson = new SampleWikidataJson();
 
         String expectedTitle = "Michael_Jackson";
-        String testUrl = artistService.findTitle(sampleWikidataJson.getJsonStr());
+        String testUrl = artistService.findWikipediaTitle(sampleWikidataJson.getJsonStr());
 
         assertEquals(expectedTitle, testUrl);
     }

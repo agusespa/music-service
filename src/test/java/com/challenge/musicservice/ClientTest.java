@@ -18,7 +18,7 @@ public class ClientTest {
     public void shouldReturnArtistDetailsResponse() {
         client = WebTestClient.bindToServer()
                 .baseUrl("http://localhost:8081")
-                .responseTimeout(Duration.ofMillis(10000000))
+                .responseTimeout(Duration.ofMillis(10000000)) // temporary, see issues in README
                 .build();
 
         client.get().uri("/musify/music-artist/details/f27ec8db-af05-4f36-916e-3d57f91ecf5e")

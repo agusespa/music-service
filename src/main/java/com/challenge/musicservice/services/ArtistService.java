@@ -42,7 +42,6 @@ public class ArtistService {
 	}
 
 	void setArtistInfo(ArtistDetailsResponse artistDetailsResponse) {
-
 		MBArtist mbArtist = getMusicBrainzArtistData(artistDetailsResponse.getMbid());
 		artistDetailsResponse.setName(mbArtist.getName());
 		artistDetailsResponse.setGender(mbArtist.getGender());
@@ -98,7 +97,6 @@ public class ArtistService {
 	}
 
 	String getWikipediaTitle(MBArtist artist) {
-
 		String wikidataLink = buildWikidataLink(artist);
 
 		try {
@@ -124,7 +122,7 @@ public class ArtistService {
 		}
 	}
 
-	// searches the string the wikipedia link and extracts the title
+	// searches the string for the wikipedia link and extracts the title
 	String findWikipediaTitle(String jsonStr) {
 		int firstIndex = jsonStr.indexOf("enwiki");
 		String tempSubstring = jsonStr.substring(firstIndex);
@@ -181,6 +179,7 @@ public class ArtistService {
 		return albums;
 	}
 
+	// extremely slow following redirects
 	String getMusicBrainzAlbumUrl(String id) {
 		String baseUrl = "http://coverartarchive.org/release-group/";
 
